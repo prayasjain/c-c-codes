@@ -1,0 +1,2 @@
+memcmp(a,b,sizeof(a))
+ returns 0 for equal

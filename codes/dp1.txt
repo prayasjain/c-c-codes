@@ -1,0 +1,12 @@
+Steady Tables 
+You have to fill a NxM matrix with non negative numbers such that the sum of numbers at row i (2=i=N) is greater than or equal to the sum of numbers in row i-1.
+
+let solve(i,x) be no of ways in which rows from i to n be filled st ith row has atleast x  and table is steady
+1) ith row has x 
+2) ith row has x+1
+solve(i,x) = solve(i+1,x)*(x+m-1)C(m-1) + solve(i,x+1)
+
+breaking statements 
+if x>m
+if i>n
+

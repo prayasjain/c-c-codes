@@ -1,0 +1,21 @@
+bool isprime(int z)//to check if z is prime
+    {
+    f=1;
+    n=sqrt(z);
+    if((z%2)==0)//check for 2 separately to improve efficiency
+    {
+    f=0;
+    }
+    else
+    {
+        for(s=3;s<n;s=s+2)//increase by 2 as we have checked for 2 separately
+    {
+    if((z%s)==0)
+    {
+    f=0;
+    break;
+    }
+    }
+    }
+    return f;
+    }

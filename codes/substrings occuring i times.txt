@@ -1,0 +1,51 @@
+Array whose ith pos shows no of substrings that occurs i times
+
+string S ="ababa"
+
+ the suffix P=S[i..N], let us calculate the array Z[i..N] where Z[i] is the maximal equal substring starting from i that matches a prefix of S[i..N].
+
+For example, for the above string consider i = 1, the whole string is the suffix "ababa". Here the Z array would be Z[1]=5 -> maximum prefix matching of "ababa" and "ababa" 
+Z[2]=0 -> maximum prefix matching of "ababa" and "baba" 
+Z[3]=3 -> maximum prefix matching of "ababa" and "aba" 
+Z[4]=0 -> maximum prefix matching of "ababa" and "ba" 
+Z[5]=1 -> maximum prefix matching of "ababa" and "a"
+
+How is this array useful for calculating cnt?
+
+From the above array we can conclude that we have 1 substring which can be choosen atleast 3 times. How? Because there are 3 entries in the above array that are greater than or equal to 1. Similarly we can deduce for 2 (2 times), 3 (2 times), 4 (1 time ) and 5(1 time). So we increment cnt[3] once, cnt[2] twice and cnt[1] twice.
+
+We do this for all suffix of S. The only thing left is to observe that cnt[i] now actually has how many different strings can be choosen atleast i times. We want it to be exactly i times. This is simple: we just subtract from cnt[i] (cnt[i+1] + cnt[i+2] ... + cnt[N]).
+
+z algo 
+int L = 0, R = 0;
+for (int i = 1; i < n; i++) {
+  if (i > R) {
+    L = R = i;
+    while (R < n && s[R-L] == s[R]) R++;
+    z[i] = R-L; R--;
+  } else {
+    int k = i-L;
+    if (z[k] < R-i+1) z[i] = z[k];
+    else {
+      L = i;
+      while (R < n && s[R-L] == s[R]) R++;
+      z[i] = R-L; R--;
+    }
+  }
+}
+
+
+
+vector<int> z_function (string s) {
+    int n = (int) s.length();
+    vector<int> z (n);
+    for (int i=1, l=0, r=0; i<n; ++i) {
+        if (i <= r)
+            z[i] = min (r-i+1, z[i-l]);
+        while (i+z[i] < n && s[z[i]] == s[i+z[i]])
+            ++z[i];
+        if (i+z[i]-1 > r)
+            l = i,  r = i+z[i]-1;
+    }
+    return z;
+}

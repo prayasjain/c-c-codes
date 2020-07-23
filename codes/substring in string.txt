@@ -1,0 +1,2 @@
+int position = s.find("010");
+int position = strstr(s, "010") - s;

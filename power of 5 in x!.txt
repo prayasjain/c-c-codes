@@ -1,0 +1,4 @@
+def fun(x):
+    if(x<5):
+        return 0
+    return (x/5)+ fun(x/5)

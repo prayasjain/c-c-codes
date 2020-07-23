@@ -1,0 +1,12 @@
+int reverse1(int x)
+    {
+        q=0;
+    for(e=0;e>=0;e++)
+    {
+    q=q*10+(x%10);
+    x=x/10;
+    if(x==0)
+    break;
+    }
+    return q;
+    }
